@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+
+[[edge_functions]]
+  function = "api"
+  path = "/*"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
