@@ -1,7 +1,9 @@
-import http from 'http';
+import https from 'https';
+import fs from 'fs';
 
-const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, `http://${req.headers.host}`);
+// Render به طور خودکار گواهی SSL فراهم میکنه
+const server = https.createServer(async (req, res) => {
+  const url = new URL(req.url, `https://${req.headers.host}`);
   const targetHost = req.headers["x-host"];
   
   if (!targetHost) {
@@ -12,7 +14,7 @@ const server = http.createServer(async (req, res) => {
 
   const targetUrl = targetHost.startsWith('http') 
     ? `${targetHost}${url.pathname}${url.search}`
-    : `http://${targetHost}${url.pathname}${url.search}`;
+    : `https://${targetHost}${url.pathname}${url.search}`;
 
   try {
     const headers = {};
@@ -39,5 +41,5 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 8080;
-server.listen(PORT, () => console.log(`xHTTP Proxy running on port ${PORT}`));
+const PORT = process.env.PORT || 443;
+server.listen(PORT, () => console.log(`HTTPS Proxy running on port ${PORT}`));
