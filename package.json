@@ -1,5 +1,7 @@
 {
-  "name": "proxy",
+  "name": "render-proxy",
   "type": "module",
-  "scripts": { "start": "node index.js" }
+  "scripts": {
+    "start": "node index.js"
+  }
 }
